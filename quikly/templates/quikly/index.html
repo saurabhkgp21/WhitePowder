@@ -1,9 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>HII</title>
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'quikly/style.css' %}" />
 </head>
 <body>
-	Saurabh and {{ name }}
+<button>Lend</button>
+<button>Borrow</button>
+<div>
+	<a href="{% url 'quikly:sign_in' %}">Sign In</a>
+</div>
+<div>
+	<a href="{% url 'quikly:sign_up' %}">Sign Up</a>
+</div>
+
+<div>
+	<a href="{% url 'quikly:sign_out' %}">Logout</a>
+</div>
 </body>
 </html>

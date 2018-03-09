@@ -1,0 +1,12 @@
+/*
+* @Author: Saurabh Agarwal
+* @Date:   2018-03-10 00:21:16
+* @Last Modified by:   Saurabh Agarwal
+* @Last Modified time: 2018-03-10 00:41:42
+*/
+body{
+	background: url('cycles.jpg') no-repeat center center fixed;
+	background-size: cover;
+	height: 100%;
+	overflow: hidden;
+}
