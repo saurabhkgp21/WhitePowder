@@ -6,17 +6,49 @@
 <link rel="stylesheet" type="text/css" href="{% static 'quikly/style.css' %}" />
 </head>
 <body>
-<button>Lend</button>
-<button>Borrow</button>
 <div>
-	<a href="{% url 'quikly:sign_in' %}">Sign In</a>
-</div>
-<div>
-	<a href="{% url 'quikly:sign_up' %}">Sign Up</a>
+	<a href="{% url 'quikly:share' %}"></a>
 </div>
 
-<div>
-	<a href="{% url 'quikly:sign_out' %}">Logout</a>
-</div>
+<button>Borrow</button>
+{% if user.is_authenticated %}
+	<div>
+		<a href="{% url 'quikly:sign_out' %}">Logout</a>
+	</div>
+	<p>
+		Hii, {{user.username}}
+	</p>
+
+	{% if cycle %}
+		<form method="post">
+		{% csrf_token %}
+			<input type="checkbox" name="cycle_available">
+			<input type="submit" value="Update" /> 
+		</form>		
+	{% else %}
+		<form method="post">
+		{% csrf_token %}
+			<label for="cycle_model">Cycle Model: </label><br>
+			<input type="text" name="cycle_model"><br>
+			<input type="checkbox" name="cycle_available">
+			<input type="submit" value="Update" /> 
+		</form>
+	{% endif%}
+
+
+{% else %}
+	<div>
+		<a href="{% url 'quikly:sign_in' %}">Sign In</a>
+	</div>
+	<div>
+		<a href="{% url 'quikly:sign_up' %}">Sign Up</a>
+	</div>
+{% endif %}
+
+{% if allow %}
+	<p>
+		Here
+	</p>
+{% endif %}
 </body>
 </html>

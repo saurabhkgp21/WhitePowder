@@ -2,26 +2,18 @@
 from __future__ import unicode_literals
 
 from django.db import models
-
-class Question(models.Model):
-	question_text = models.CharField(max_length=200)
-	pub_date = models.DateTimeField('date published')
-
-
-class Choice(models.Model):
-	question = models.ForeignKey(Question, on_delete=models.CASCADE)
-	choice_text = models.CharField(max_length=200)
-	votes = models.IntegerField(default=0)
-
-class Users(models.Model):
-	user_name = models.CharField(max_length = 100)
-	hall = models.CharField(max_length = 100)
-	year_of_study = models.IntegerField()
-	email = models.EmailField()
+from django.contrib.auth.models import User
 
 class Cycles(models.Model):
-	owner = models.CharField(max_length = 100)
-	model = models.CharField(max_length = 50)
-	
+	STATUS = (('Not_Available', 'Not_Available'), ('Available', 'Available'))
+	owner = models.ForeignKey('QuiklyUser', on_delete=models.CASCADE, related_name='my_cycle')
+	cycle_model = models.CharField(max_length = 50)
+	latitude = models.DecimalField(default=0, decimal_places=5, max_digits=9)
+	longitude = models.DecimalField(default=0, decimal_places=5, max_digits=9)
+	status = models.CharField(max_length=10, choices=STATUS, default="Not_Available")
 		
-		
+class QuiklyUser(models.Model):
+	STATUS = (('LogIn', 'LogIn'), ('LogOut', 'LogOut'))
+	user = models.OneToOneField(User, on_delete=models.CASCADE)
+	phone = models.IntegerField(blank=True, null=True)
+	status = models.CharField(max_length=10, choices=STATUS, default="LogOut")
