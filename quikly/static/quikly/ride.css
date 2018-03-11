@@ -2,9 +2,9 @@
 * @Author: Saurabh Agarwal
 * @Date:   2018-03-11 01:21:06
 * @Last Modified by:   Saurabh Agarwal
-* @Last Modified time: 2018-03-11 01:21:14
+* @Last Modified time: 2018-03-11 21:39:40
 */
-      #map {
-        height: 400px;
-        width: 100%;
-       }
+#map {
+	height: 400px;
+	width: 100%;
+}

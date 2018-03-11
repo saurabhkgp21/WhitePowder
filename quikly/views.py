@@ -132,7 +132,13 @@ def LogOut(request):
 	return HttpResponseRedirect(reverse('quikly:index'))
 
 def Ride(request):
+	lat_x = 22.33
+	long_x = 87.30
+
+		
 	cycles = Cycles.objects.filter(status='Available')
+	for cycle in cycles:
+		print(cycle.cycle_model)
 	return render(request, 'quikly/ride.html',{
 		'user': request.user,
 		'cycles': cycles,

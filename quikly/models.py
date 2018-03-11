@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 
 class Cycles(models.Model):
 	STATUS = (('Not_Available', 'Not_Available'), ('Available', 'Available'))
-	owner = models.OneToOneField('QuiklyUser', on_delete=models.CASCADE, related_name='my_cycle')
+	owner = models.ForeignKey('QuiklyUser', on_delete=models.CASCADE, related_name='my_cycle')
 	cycle_model = models.CharField(max_length = 50)
 	latitude = models.DecimalField(default=0, decimal_places=5, max_digits=9)
 	longitude = models.DecimalField(default=0, decimal_places=5, max_digits=9)

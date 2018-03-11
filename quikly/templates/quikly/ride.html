@@ -5,18 +5,15 @@
   <link rel="stylesheet" type="text/css" href="{% static 'quikly/ride.css' %}" />
   </head>
   <body>
-    <h3>My Google Maps Demo</h3>
-    <div id="map"></div>
+    <h3>My Bing Maps Demo</h3>
+    <div id="map1"></div>
+	<script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?branch=release&callback=initMap'></script>
     <script>
-    
-    var coordinates = {
-    	lat : 22,
-    	long : 87,
-    }
 	
 	function initMap() {
+		alert({{cycles.count}})
       	if (navigator.geolocation){
-			navigator.geolocation.getCurrentPosition( successFunction);
+		navigator.geolocation.getCurrentPosition( successFunction);
 		} 
 
 		else 
@@ -29,20 +26,17 @@
     function successFunction(pos) {
 		lat = pos.coords.latitude;
 	    long = pos.coords.longitude;
-        var uluru = {lat: lat, lng: long};
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 15,
-          center: uluru
-        });
-        
-        var marker = new google.maps.Marker({
-          position: uluru,
-          map: map
-        });
+		map = new Microsoft.Maps.Map(document.getElementById('map1'), {
+		    credentials: 'ApBC3uUFt_qROZ7IK1b5qlIxYpzlsMAx5kPHo4WUET36OGBO-4jFcwdEx2nRe8qS',
+		    center: new Microsoft.Maps.Location(lat, long),
+		    zoom: 17
+		});
+		
+
+		var myLocationPin = new Microsoft.Maps.Pushpin(
+	    	map.getCenter(), {color: 'blue'});
+	    map.entities.push(myLocationPin);
 	}
-    </script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA1dwTqEYB75ABgVE0rkfaKWwIEhuVUIu4&callback=initMap">
     </script>
   </body>
 </html>
