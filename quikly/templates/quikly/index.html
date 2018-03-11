@@ -4,11 +4,10 @@
 {% load static %}
 
 <link rel="stylesheet" type="text/css" href="{% static 'quikly/style.css' %}" />
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+
 </head>
 <body>
-<div>
-	<a href="{% url 'quikly:share' %}"></a>
-</div>
 
 <button>Borrow</button>
 {% if user.is_authenticated %}
@@ -28,8 +27,6 @@
 	{% else %}
 		<form method="post">
 		{% csrf_token %}
-			<label for="cycle_model">Cycle Model: </label><br>
-			<input type="text" name="cycle_model"><br>
 			<input type="checkbox" name="cycle_available">
 			<input type="submit" value="Update" /> 
 		</form>
@@ -50,5 +47,29 @@
 		Here
 	</p>
 {% endif %}
+
+
+<script type="text/javascript">
+    function successFunction(pos) {
+	var lat = pos.coords.latitude;
+    var long = pos.coords.longitude;
+    $.post("{% url 'quikly:position' %}",
+    {
+    	latitude:lat,
+    	longitude:long,
+    });
+}
+function errorFunction(position) {
+	alert('Error!');
+}
+
+	if (navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition(successFunction, errorFunction);
+	} else {
+		alert('It seems like Geolocation, which is required for this page, is not enabled in your browser. Please use a browser which supports it.');
+	}
+</script>
+
+
 </body>
 </html>

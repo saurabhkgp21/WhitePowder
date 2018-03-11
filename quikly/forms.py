@@ -2,7 +2,7 @@
 # @Author: Saurabh Agarwal
 # @Date:   2018-03-10 01:56:14
 # @Last Modified by:   Saurabh Agarwal
-# @Last Modified time: 2018-03-10 02:29:08
+# @Last Modified time: 2018-03-11 14:15:44
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
@@ -15,3 +15,4 @@ class SignUpForm(UserCreationForm):
     # class Meta:
     #     model = User
     #     fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', )
+	
