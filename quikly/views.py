@@ -144,6 +144,15 @@ def Ride(request):
 		'cycles': cycles,
 		})
 
+def Cycle(request, pk):
+	cycle = Cycles.objects.filter(id=pk)[0]
+	cycle.status = 'Not_Available'
+	cycle.save()
+	print(cycle.owner.user.username, cycle.owner.phone)
+	return render(request,"quikly/cycle.html",{
+		'cycle':cycle
+		})
+
 @csrf_exempt
 def Position(request):
 	print("Getting Position")

@@ -2,7 +2,7 @@
 # @Author: Saurabh Agarwal
 # @Date:   2018-03-09 18:37:55
 # @Last Modified by:   Saurabh Agarwal
-# @Last Modified time: 2018-03-11 14:16:27
+# @Last Modified time: 2018-03-12 01:29:14
 from django.urls import path
 from django.conf.urls import url
 from django.contrib.auth import views as auth_views
@@ -18,4 +18,5 @@ urlpatterns = [
 	url(r'^sign_up/$', views.SignUp, name='sign_up'),
 	url(r'^ride/$', views.Ride, name='ride'),
 	url(r'^position/$', views.Position, name='position'),
+	url(r'^cycle/(?P<pk>\S+)/$', views.Cycle, name='cycle'),
 ]
