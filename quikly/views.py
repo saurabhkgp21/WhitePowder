@@ -112,13 +112,11 @@ def LogOut(request):
 	return HttpResponseRedirect(reverse('quikly:index'))
 
 def Ride(request):
-	# lat_x = 22.33
-	# long_x = 87.30
-	# for i in range(1,5):
-	# 	lat_x += 0.01
-	# 	long_x += 0.01
+	# lat_x = 22.319658	
+	# long_x = 87.309339
+	# for i in range(1,2):
 	# 	owner = QuiklyUser.objects.filter(user=request.user)[0]
-	# 	cycle_model = "model"+str(i)
+	# 	cycle_model = "rk"+str(i)
 	# 	Cycles(owner=owner, cycle_model=cycle_model, latitude=lat_x, longitude=long_x, status="Available").save()
 	if not request.user.is_authenticated:
 		return HttpResponseRedirect(reverse('quikly:sign_in'))

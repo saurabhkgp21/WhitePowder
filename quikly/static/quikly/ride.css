@@ -1,8 +1,8 @@
 /*
 * @Author: Saurabh Agarwal
 * @Date:   2018-03-11 01:21:06
-* @Last Modified by:   Saurabh Agarwal
-* @Last Modified time: 2018-03-12 19:19:00
+* @Last Modified by:   saurabh
+* @Last Modified time: 2018-03-12 23:25:57
 */
 #map {
 	height: 500px;
@@ -51,7 +51,7 @@ a{
 }
 
 #notification {
-	display: block;
+	display: none;
 	width: 200px;
 	height: 150px;
 	position: absolute;

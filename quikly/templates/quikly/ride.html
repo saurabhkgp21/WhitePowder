@@ -70,7 +70,7 @@
 		map = new Microsoft.Maps.Map(document.getElementById('map'), {
 		    credentials: 'ApBC3uUFt_qROZ7IK1b5qlIxYpzlsMAx5kPHo4WUET36OGBO-4jFcwdEx2nRe8qS',
 		    center: new Microsoft.Maps.Location(lat, long),
-		    zoom: 12
+		    zoom: 16
 		});
 		
 	    {% for cycle in cycles %}
@@ -79,13 +79,12 @@
 	    			icon: "{% static 'quikly/cycle_transparent.png' %}"
 	    		});
 	    	map.entities.push(Pin);
-	    	// var userid = lenderPins[i].userid.toString();
 			Microsoft.Maps.Events.addHandler(Pin, 'click', function() {
-				$(notification).css("display","block");
-				alert("done");
-				var owner_name = "{{cycle.owner.user.username}}";
-				var contact = "{{cycle.owner.phone}}";
-				notify(owner_name, contact);
+				$("#notification").css("display","block");
+				// alert("done");
+				// var owner_name = "{{cycle.owner.user.username}}";
+				// var contact = "{{cycle.owner.phone}}";
+				// notify(owner_name, contact);
 			});
 	    {% endfor %}
 
@@ -93,9 +92,9 @@
 	    	map.getCenter(), {color: 'blue'});
 	    map.entities.push(myLocationPin);
 
-	    function notify(owner_name, contact){
-	    	$("#notification").text(owner_name + " " + contact);
-	    }
+	    // function notify(owner_name, contact){
+	    // 	$("#notification").text(owner_name + " " + contact);
+	    // }
 
 	}
     </script>
