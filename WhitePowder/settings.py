@@ -25,7 +25,7 @@ SECRET_KEY = '$jz6rydg30k0=339so(n!%=n_0n4+m+kjsds#ig0c1c$vc0gw@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', 'quikly.herokuapp.com']
 
 
 # Application definition
@@ -84,11 +84,9 @@ WSGI_APPLICATION = 'WhitePowder.wsgi.application'
 
 SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
-DATABASES = {
-    'default': dj_database_url.config(
-        default=config('DATABASE_URL')
-    )
-}
+import dj_database_url
+DATABASES = { 'default': dj_database_url.config(
+    default='postgres://knteqwokccbydx:b83f772852371987fcd5339a45e38c3abb2716da3c2a233c8efcc184a30d1089@ec2-54-83-23-91.compute-1.amazonaws.com:5432/dfhn95ghufmtus') }
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
