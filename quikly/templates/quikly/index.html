@@ -17,7 +17,7 @@
 				<div id="login_field">
 					{% if user.is_authenticated %}
 						<div id="nav_box">
-							Hii, {{user.username}}
+							{{user.username}}
 						</div>
 						<div id="nav_box">
 							<a href="{% url 'quikly:sign_out' %}">Logout</a>

@@ -2,7 +2,7 @@
 * @Author: Saurabh Agarwal
 * @Date:   2018-03-10 00:21:16
 * @Last Modified by:   Saurabh Agarwal
-* @Last Modified time: 2018-03-12 15:00:21
+* @Last Modified time: 2018-03-12 15:40:13
 */
 
 body {
@@ -23,7 +23,7 @@ body {
 #top-bar {
 	width: 100%;
 	min-width: 980px;
-	height: 10vh;
+	height: 50px;
 	border-bottom: 1px solid transparent;
 	background-color: rgba(78,77,77,0.1);
 }

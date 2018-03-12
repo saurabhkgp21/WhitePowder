@@ -6,8 +6,27 @@
   <link href="../../static/quikly/cycle_transparent.png" rel="icon">
 
   </head>
-  <body>
-    <h3>My Bing Maps Demo</h3>
+	<body>
+	<div id="top-bar">
+		<div id="login_field">
+			{% if user.is_authenticated %}
+				<div id="nav_box">
+					{{user.username}}
+				</div>
+				<div id="nav_box">
+					<a href="{% url 'quikly:sign_out' %}">Logout</a>
+				</div>
+			{% else %}
+					<div id="nav_box">
+						<a href="{% url 'quikly:sign_in' %}">Sign In</a>
+					</div>
+					<div id="nav_box">
+						<a href="{% url 'quikly:sign_up' %}">Sign Up</a>
+					</div>				
+			{% endif %}	
+		</div>
+		
+	</div>
     <div id="map"></div>
 	<script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?branch=release&callback=initMap' async defer></script>
     <script>

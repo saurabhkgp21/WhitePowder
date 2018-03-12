@@ -2,7 +2,7 @@
 * @Author: Saurabh Agarwal
 * @Date:   2018-03-10 00:21:16
 * @Last Modified by:   Saurabh Agarwal
-* @Last Modified time: 2018-03-12 14:21:24
+* @Last Modified time: 2018-03-12 15:00:21
 */
 
 body {
@@ -190,21 +190,34 @@ input:checked + .slider:before {
 }
 
 #borrow{
+	position: absolute;
+	height: 100%;
 	display: inline-block;
+	width: 50%;
 }
 #share{
+	position: absolute;
+	height: 100%;
 	display: inline-block;
+	width: 50%;
+	right: 0%;
 }
 
 #utils{
 	position: absolute;
-	left: 30%;
+	left: 15%;
 	top: 30%;
+	width: 350px;
+	height: 75px;
 }
 
-/*#form_style{
+#descrp{
+	margin: 0 auto;
+	height: 30px;
+	text-align: center;
+}
+#form_style{
 	position: absolute;
-	left: 30%;
-	top: 30%;
-
-}*/
+	top: 50%;
+	transform: translateY(-50%);
+}

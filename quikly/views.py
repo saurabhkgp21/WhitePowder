@@ -46,7 +46,6 @@ def index(request, cycle_available=False):
 			cycle_available = True
 
 		return render(request,'quikly/index.html',{
-		'name':'Saurabh',
 		'user': request.user,
 		'cycle': cycle_available,
 		# 'pos':position,
@@ -114,15 +113,26 @@ def LogOut(request):
 
 def Ride(request):
 	# lat_x = 22.33
-	# long_x = 87.30	
+	# long_x = 87.30
+	# for i in range(1,5):
+	# 	lat_x += 0.01
+	# 	long_x += 0.01
+	# 	owner = QuiklyUser.objects.filter(user=request.user)[0]
+	# 	cycle_model = "model"+str(i)
+	# 	Cycles(owner=owner, cycle_model=cycle_model, latitude=lat_x, longitude=long_x, status="Available").save()
 	if not request.user.is_authenticated:
 		return HttpResponseRedirect(reverse('quikly:sign_in'))
 	cycles = Cycles.objects.filter(status='Available')
+	sending_cycles = []
 	for cycle in cycles:
-		print(cycle.cycle_model)
+		if cycle.owner.user == request.user:
+			pass
+		else:
+			sending_cycles.append(cycle)
+			print(cycle.status, cycle.cycle_model)
 	return render(request, 'quikly/ride.html',{
 		'user': request.user,
-		'cycles': cycles,
+		'cycles': sending_cycles,
 		})
 
 def Cycle(request, pk):
