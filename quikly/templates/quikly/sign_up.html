@@ -114,6 +114,8 @@ hr {
 </head>
 <body>
 
+{% if error %}<p><strong>{{ error }}</strong></p>{% endif %}
+
 <div id="id01" class="modal">
   <form class="modal-content" method="post">
   {% csrf_token %}

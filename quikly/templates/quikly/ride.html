@@ -4,6 +4,7 @@
   {% load static %}
   <link rel="stylesheet" type="text/css" href="{% static 'quikly/ride.css' %}" />
   <link href="../../static/quikly/cycle_transparent.png" rel="icon">
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 
   </head>
 	<body>
@@ -28,11 +29,30 @@
 		
 	</div>
     <div id="map"></div>
+
+    <div id="notification">
+    	<div id="notification-content">
+    		<div id="description">
+    			Description
+    		</div>
+    		<table id="description-table">
+    		<tr>
+    			<td id="description-name">Name</td>
+    			<td id="user-name">Rohan</td>
+    		</tr>
+    		<tr>
+    			<td id="description-contact">Contact</td>
+    			<td id="user-contact">9929728986</td>
+    		</tr>
+    		</table>
+    	</div>
+    </div>
+
+
 	<script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?branch=release&callback=initMap' async defer></script>
     <script>
 	
 	function initMap() {
-		alert({{cycles.count}})
       	if (navigator.geolocation){
 			navigator.geolocation.getCurrentPosition( successFunction);
 		} 
@@ -50,7 +70,7 @@
 		map = new Microsoft.Maps.Map(document.getElementById('map'), {
 		    credentials: 'ApBC3uUFt_qROZ7IK1b5qlIxYpzlsMAx5kPHo4WUET36OGBO-4jFcwdEx2nRe8qS',
 		    center: new Microsoft.Maps.Location(lat, long),
-		    zoom: 17
+		    zoom: 12
 		});
 		
 	    {% for cycle in cycles %}
@@ -61,13 +81,22 @@
 	    	map.entities.push(Pin);
 	    	// var userid = lenderPins[i].userid.toString();
 			Microsoft.Maps.Events.addHandler(Pin, 'click', function() {
-				window.location.href = "/cycle/" + "{{cycle.id}}";
+				$(notification).css("display","block");
+				alert("done");
+				var owner_name = "{{cycle.owner.user.username}}";
+				var contact = "{{cycle.owner.phone}}";
+				notify(owner_name, contact);
 			});
 	    {% endfor %}
 
 		var myLocationPin = new Microsoft.Maps.Pushpin(
 	    	map.getCenter(), {color: 'blue'});
 	    map.entities.push(myLocationPin);
+
+	    function notify(owner_name, contact){
+	    	$("#notification").text(owner_name + " " + contact);
+	    }
+
 	}
     </script>
   </body>
