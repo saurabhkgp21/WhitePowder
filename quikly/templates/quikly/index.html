@@ -2,53 +2,95 @@
 <html>
 <head>
 {% load static %}
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <link rel="stylesheet" type="text/css" href="{% static 'quikly/style.css' %}" />
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+<link href="../../static/quikly/cycle_transparent.png" rel="icon">
+
 
 </head>
 <body>
-<div id="main_box">
-	
+<div >
+		<div id="top-bar">
+				<div id="login_field">
+					{% if user.is_authenticated %}
+						<div id="nav_box">
+							Hii, {{user.username}}
+						</div>
+						<div id="nav_box">
+							<a href="{% url 'quikly:sign_out' %}">Logout</a>
+						</div>
+					{% else %}
+							<div id="nav_box">
+								<a href="{% url 'quikly:sign_in' %}">Sign In</a>
+							</div>
+							<div id="nav_box">
+								<a href="{% url 'quikly:sign_up' %}">Sign Up</a>
+							</div>				
+
+					{% endif %}	
+				</div>
+				
+		</div>
+		<div id="middle_body">
+			<div id="cycle">
+				<img src="../../static/quikly/cover_pic.png">
+			</div>
+		</div>
 </div>
-{% if user.is_authenticated %}
-	<div>
-		<a href="{% url 'quikly:sign_out' %}">Logout</a>
+
+
+<div id="utils">
+	<div id="borrow">
+		<p id="descrp">
+			Want to take a Ride??
+		</p >
+		<div style="position: absolute; width: 100%">
+			<div class="button" style="width: 80%; position: absolute;
+			left: 50%; transform: translateX(-50%);">
+				<a href="{% url 'quikly:ride' %}">
+					Take a Ride
+				</a>
+			</div>
+		</div>
 	</div>
-	<p>
-		Hii, {{user.username}}
-	</p>
-
-	{% if cycle %}
-		<form method="post">
-		{% csrf_token %}
-			<input type="checkbox" name="cycle_available">
-			<input type="submit" value="Update" /> 
-		</form>		
-	{% else %}
-		<form method="post">
-		{% csrf_token %}
-			<input type="checkbox" name="cycle_available">
-			<input type="submit" value="Update" /> 
-		</form>
-	{% endif%}
-
-
-{% else %}
-	<div>
-		<a href="{% url 'quikly:sign_in' %}">Sign In</a>
+	<div id="share">
+		<p id="descrp">
+			Your cycle status
+		</p>
+		<div style="position: absolute; height: 45px; width: 100%;">
+		{% if cycle %}
+			<form method="post" id="form_style">
+			{% csrf_token %}
+				<div style="position: absolute; top: 50%; transform: translateY(-50%);">
+				<label class="switch">
+			  		<input type="checkbox" name="cycle_available">
+			  		<span class="slider round"></span>
+				</label>
+				</div>
+				<div style="position: relative; left: 70px">
+				<input type="submit" name="Update" class="button" value="Update">
+				</div>
+			</form>	
+		{% else %}
+			<form method="post" id="form_style">
+			{% csrf_token %}
+				<div style="position: absolute; top: 50%; transform: translateY(-50%);">
+				<label class="switch">
+			  		<input type="checkbox" name="cycle_available" checked>
+			  		<span class="slider round"></span>
+				</label>
+				</div>
+				<div style="position: relative; left: 70px">
+				<input type="submit" name="Update" class="button" value="Update">
+				</div>
+			</form>
+		{% endif%}
+		</div>
 	</div>
-	<div>
-		<a href="{% url 'quikly:sign_up' %}">Sign Up</a>
-	</div>
-{% endif %}
-
-{% if allow %}
-	<p>
-		Here
-	</p>
-{% endif %}
-
+</div>
 
 <script type="text/javascript">
     function successFunction(pos) {

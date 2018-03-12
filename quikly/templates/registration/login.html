@@ -2,25 +2,48 @@
 <html>
 <head>
     <title>Login</title>
+{% load static %}
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" type="text/css" href="{% static 'quikly/login.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'quikly/forms.css' %}" />
+<link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+<link href="../../static/quikly/cycle_transparent.png" rel="icon">
 
 </head>
 
 <body>
-        <center>
-            <h2 >ACCOUNT LOGIN</h2>
-            <form method="post">
-                {% csrf_token %}
-                        <label >USERNAME</label>
-                        <input type="text" name="username" placeholder="Username"  required>
-                    <label >PASSWORD</label><br>
-                    <input type="password" name="password" placeholder= "Password"  required>
-                    <input type="submit" value="Login" /> 
 
-            </form>
+<div id="big_box">
+    <div id="left_box">
+        <img src="../../static/quikly/sharing.jpg">
+    </div>
+    <div id="right_box">
+        <div class="modal">
+          <form class="modal-content" method="post">
+          {% csrf_token %}
+            <div class="container">
+              <h1>Sign In</h1>
+              <hr>
+              <label for="username"><b>User Name</b></label>
+              <input type="text" placeholder="Username" name="username" required>
+
+              <label for="password"><b>Password</b></label>
+              <input type="password" placeholder="Enter Password" name="password" required>
+
+              
+
+              <div class="clearfix">
+                <button type="button" onclick="window.location.href='{% url "quikly:index"%}'" class="cancelbtn">Cancel</button>
+                <button type="submit" class="signupbtn">Sign Up</button>
+              </div>
+            </div>
+          </form>
+        </div>
 
 
-
-        </center>
+    </div>
+</div>
+        
   {% if error %}<p><strong>{{ error }}</strong></p>{% endif %}
 </body>
 </html>

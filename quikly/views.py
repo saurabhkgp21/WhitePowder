@@ -17,36 +17,19 @@ from django.views.decorators.csrf import csrf_exempt
 def index(request, cycle_available=False):
 
 	if request.method == 'POST':
-		print("Request ", request.POST)
-		# position = Position(data =request.POST)
-		# if position.is_valid():
-		# 	position.save()
-		# 	print(position.cleaned_data.get('latitude'))
-		# 	print(position.cleaned_data.get('longitude'))
-		# else:
-		# 	print("Position not received")
+		if not request.user.is_authenticated:
+			return HttpResponseRedirect(reverse('quikly:sign_in'))
 		cycle_available = request.POST.get('cycle_available','')
 		print("Print availability ", cycle_available)
 		if cycle_available:
-			# cycle_model = request.POST.get('cycle_model','')
 			my_id = QuiklyUser.objects.filter(user = request.user)[0]
-			my_cycle = my_id.my_cycle
+			my_cycle = Cycles.objects.filter(owner=my_id)[0]
 			my_cycle.status = 'Available'
 			print("Heree")
 			my_cycle.save()
-			# send_url = 'http://freegeoip.net/json'
-			# r = requests.get(send_url)
-			# j = json.loads(r.text)
-			# latitude = j['latitude']
-			# longitude = j['longitude']
-			# longitude = request.POST.get('longitude','')
-			# latitude = request.POST.get('latitude','')
-			# print(longitude, latitude)
-			# Cycles(cycle_model=cycle_model, latitude=latitude,status = 'Available' ,longitude=longitude, owner = owner).save()
-
 		else:
 			my_id = QuiklyUser.objects.filter(user = request.user)[0]
-			cycle = my_id.my_cycle
+			cycle = Cycles.objects.filter(owner=my_id)[0]
 			if cycle.status == 'Available':
 				cycle.status = 'Not_Available'
 				cycle.save()
@@ -55,14 +38,12 @@ def index(request, cycle_available=False):
 		# position = Position()
 		print("Logged in ", request.user.username)
 		print("Cycles", len(Cycles.objects.all()))
-		for cycle in Cycles.objects.all():
+		for cycle in Cycles.objects.filter(status="Available"):
 			print(cycle.cycle_model)
 		my_id = QuiklyUser.objects.filter(user=request.user)[0]
-		# cycles = my_id.my_cycle.all()
-		# if len(cycles):
-		# 	cycle = cycles[0]
-		# 	if cycle.status == 'Available':
-		# 		cycle_available = True
+		cycle = Cycles.objects.filter(owner=my_id)[0]
+		if cycle.status == 'Available':
+			cycle_available = True
 
 		return render(request,'quikly/index.html',{
 		'name':'Saurabh',
@@ -132,10 +113,10 @@ def LogOut(request):
 	return HttpResponseRedirect(reverse('quikly:index'))
 
 def Ride(request):
-	lat_x = 22.33
-	long_x = 87.30
-
-		
+	# lat_x = 22.33
+	# long_x = 87.30	
+	if not request.user.is_authenticated:
+		return HttpResponseRedirect(reverse('quikly:sign_in'))
 	cycles = Cycles.objects.filter(status='Available')
 	for cycle in cycles:
 		print(cycle.cycle_model)
@@ -156,16 +137,18 @@ def Cycle(request, pk):
 @csrf_exempt
 def Position(request):
 	print("Getting Position")
-	if request.method == 'POST':
+	if request.method == 'POST' and request.user.is_authenticated:
 		latitude = request.POST.get('latitude')
 		longitude = request.POST.get('longitude')
 		print(latitude, longitude)
 		owner = request.user
-		my_id = QuiklyUser.objects.filter(user=request.user)
+		my_id = QuiklyUser.objects.filter(user=request.user)[0]
 		cycle = my_id.my_cycle.all()[0]
 		cycle.latitude = latitude
 		cycle.longitude = longitude
 		cycle.save()
+
+	return HttpResponse("Here")
 
 
 # @csrf_exempt
