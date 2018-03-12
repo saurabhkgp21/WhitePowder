@@ -1,0 +1,1 @@
+Getting from point A to point B is now faster than ever. Quikly is a cycle sharing web app which has a hassle-free UI to provide seamless connectivity.
